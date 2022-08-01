@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InputMismatchException;
@@ -6,23 +7,23 @@ import java.util.Scanner;
 
 public class Program {
 
-    private static int number;
-    public static void main(String[] args) {
+    public static int number;
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         Scanner sc = new Scanner(System.in);
         List <Integer> list =  new ArrayList<>();
-        
-        System.out.println("Menu:\n");
-        System.out.println("0 - Sair");
-        System.out.println("1 - Exibir a lista");
-        System.out.println("2 - Adicionar elemento");
-        System.out.println("3 - Remover elemento");
-        System.out.println("4 - Exibir o tamanho da lista");
-        System.out.println("5 - Limpar a lista\n");
             
         try {
-            do {   
+            System.out.println("Menu:\n");
+            do {
+                System.out.println("0 - Sair");
+                System.out.println("1 - Exibir a lista");
+                System.out.println("2 - Adicionar elemento");
+                System.out.println("3 - Remover elemento");
+                System.out.println("4 - Exibir o tamanho da lista");
+                System.out.println("5 - Limpar a lista\n");   
                 number = sc.nextInt();
+                clearScreen();
 
                 switch (number){
                     case 1:
@@ -81,7 +82,7 @@ public class Program {
                             list.clear();
                             System.out.println("\nLista limpa.");
                         }
-                        break; 
+                        break;
                     default :
                         if (number != 0) {
                             System.out.println("\nOpcao invalida!");
@@ -90,7 +91,8 @@ public class Program {
                 }
 
                 if (number != 0) {
-                    System.out.print("\nEscolha outra opcao: ");
+                    System.out.println("\nEscolha outra opcao: ");
+                    System.out.println();
                 }
             } while(number != 0);
         }
@@ -106,5 +108,14 @@ public class Program {
         }
         
         sc.close();
+    }
+
+    public static void clearScreen() throws IOException, InterruptedException {
+        if (System.getProperty("os.name").contains("Windows")) {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        }
+        else {
+            Runtime.getRuntime().exec("clear");
+        }
     }
 }
