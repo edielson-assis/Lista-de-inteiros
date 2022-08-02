@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class Program {
 
-    public static int number;
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static int x;
+    public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
         List <Integer> list =  new ArrayList<>();
@@ -22,10 +22,10 @@ public class Program {
                 System.out.println("3 - Remover elemento");
                 System.out.println("4 - Exibir o tamanho da lista");
                 System.out.println("5 - Limpar a lista\n");   
-                number = sc.nextInt();
-                clearScreen();
+                x = sc.nextInt();
+                limpadorDeTela();
 
-                switch (number){
+                switch (x){
                     case 1:
                         if (!list.isEmpty()) { 
                             Collections.sort(list);
@@ -84,17 +84,23 @@ public class Program {
                         }
                         break;
                     default :
-                        if (number != 0) {
+                        if (x != 0) {
                             System.out.println("\nOpcao invalida!");
                         }
                         break;
                 }
 
-                if (number != 0) {
+                if (x != 0) {
                     System.out.println("\nEscolha outra opcao: ");
                     System.out.println();
                 }
-            } while(number != 0);
+            } while(x != 0);
+        }
+        catch (IOException e) {
+            e.getMessage();
+        }
+        catch (InterruptedException e) {
+            e.getMessage();
         }
         catch (InputMismatchException e) {
             System.out.println("Erro de entrada");
@@ -109,8 +115,9 @@ public class Program {
         
         sc.close();
     }
-
-    public static void clearScreen() throws IOException, InterruptedException {
+    
+    //https://dicasdejava.com.br/java-como-limpar-a-tela-do-console/
+    public static void limpadorDeTela() throws IOException, InterruptedException {
         if (System.getProperty("os.name").contains("Windows")) {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         }
